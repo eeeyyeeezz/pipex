@@ -35,34 +35,64 @@ static	void	open_all(t_struct *global, int argc, char **argv)
 		ft_error("Pipe Error!\n");
 }
 
-static void	ft_pipex(t_struct *global, int argc, char **argv)
+static void	ft_pipex(t_struct *global, int argc, char **argv, char **envp)
 {
 	char	**splitted;
 	char	*cmd_join;
 	char	**args;
 	int	i;
-	int	fd;
+	int	pid1;
+	int	pid2;
 
 	i = -1;
-	args = ft_split(global->cmds[0], ' ');
-	fd = fork();
-	char *ls[] = {"ls", NULL};
-	if (fd == -1)
+	dup2(global->files_fd[0], 0);
+	dup2(global->files_fd[1], 1);
+	pid1 = fork();
+	if (pid1 == -1)
 		ft_error("Fork Error!\n");
-	if (fd == 0)
+	if (pid1 == 0)
 	{
+		dup2(global->pipe_fd[1], 1);
+		close(global->pipe_fd[0]);
+		close(global->pipe_fd[1]);
+		args = ft_split(global->cmds[0], ' ');
 		splitted = ft_split(getenv("PATH"), ':');
 		while (splitted[++i])
 		{
 			cmd_join = ft_strjoin_new(splitted[i], "/");
-			cmd_join = ft_strjoin_new(cmd_join, global->cmds[0]);
+			cmd_join = ft_strjoin_new(cmd_join, args[0]);
 			if (!access(cmd_join, 00))
 			{ 
-				execve(cmd_join, args, NULL);
-				break ;
+				execve(cmd_join, args, envp);
+				free(args);
+				exit(0);
 			}
 		}
 	}
+	pid2 = fork();
+	if (pid2 == 0)
+	{
+		dup2(global->pipe_fd[0], 0);
+		close(global->pipe_fd[0]);
+		close(global->pipe_fd[1]);
+		args = ft_split(global->cmds[1], ' ');
+		splitted = ft_split(getenv("PATH"), ':');
+		while (splitted[++i])
+		{
+			cmd_join = ft_strjoin_new(splitted[i], "/");
+			cmd_join = ft_strjoin_new(cmd_join, args[0]);
+			if (!access(cmd_join, 00))
+			{ 
+				execve(cmd_join, args, envp);
+				free(args);
+				exit(0);
+			}
+		}
+	}
+	close(global->pipe_fd[0]);
+	close(global->pipe_fd[1]);
+	waitpid(pid1, NULL, 0); 
+	waitpid(pid2, NULL, 0); 
 }
 
 int			main(int argc, char **argv, char **envp)
@@ -75,7 +105,7 @@ int			main(int argc, char **argv, char **envp)
 		ft_error("Args Error!\n");
 	pars_args(&global, argc, argv);
 	open_all(&global, argc, argv);
-	ft_pipex(&global, argc, argv);
+	ft_pipex(&global, argc, argv, envp);
 	free_all(&global);
 	// execve("/bin/ls", argv, envp);
 }
