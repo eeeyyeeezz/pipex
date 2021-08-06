@@ -12,7 +12,7 @@ typedef struct s_struct
 	int			pipe_fd[2];
 	int			*fd;
 	char		*file1;
-	char		**cmds;
+	char		***cmds;
 	char		*file2;
 }				t_struct;
 
