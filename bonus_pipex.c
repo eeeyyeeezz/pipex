@@ -49,18 +49,18 @@ static	void	pars_args(t_struct *global, int argc, char **argv)
 static	void	open_all(t_struct *global, int argc, char **argv)
 {
 	global->files_fd[0] = open(argv[1], O_RDONLY);
-	global->files_fd[1] = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0666);			 // bonus
+	global->files_fd[1] = open(argv[argc - 1], O_TRUNC | O_WRONLY | O_CREAT, 0666);
 	if (global->files_fd[0] == -1 || global->files_fd[1] == -1)
 		ft_error("Fd Error!\n");
-	// if (pipe(global->pipe_fd) == -1)
-		// ft_error("Pipe Error!\n");
 }
 
 static void	ft_pipex(t_struct *global, int argc, char **argv, char **envp)
 {
 	int		pipe_fd[2];
+	int		fdd;
 	pid_t	pid;
 
+	fdd = 0;
 	dup2(global->files_fd[0], 0);
 	dup2(global->files_fd[1], 1);
 	while (*global->cmds != NULL)
@@ -72,12 +72,21 @@ static void	ft_pipex(t_struct *global, int argc, char **argv, char **envp)
 			ft_error("Fork Error!\n");
 		else if (pid == 0)
 		{
-
+			dup2(fdd, 0);
+			if (*(global->cmds + 1) != NULL) 
+				dup2(pipe_fd[1], 1);
+			else
+				dup2(global->files_fd[1], 1);
+			close(pipe_fd[0]);
+			close(pipe_fd[1]);
+			execvp((*global->cmds)[0], *global->cmds);
+			exit(0);
 		}
 		else 
 		{
 			wait(NULL);
 			close(pipe_fd[1]);
+			fdd = pipe_fd[0];
 			global->cmds++;
 		}
 	}
@@ -93,7 +102,7 @@ int			main(int argc, char **argv, char **envp)
 		ft_error("Args Error!\n");
 	pars_args(&global, argc, argv);
 	open_all(&global, argc, argv);
-	// ft_pipex(&global, argc, argv, envp);
-	free_all(&global);
+	ft_pipex(&global, argc, argv, envp);
+	// free_all(&global);
 	// execve("/bin/ls", argv, envp);
 }

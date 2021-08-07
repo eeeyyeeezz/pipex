@@ -5,6 +5,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
+# include "libft/libft.h"
 
 typedef struct s_struct
 {
@@ -12,17 +13,17 @@ typedef struct s_struct
 	int			pipe_fd[2];
 	int			*fd;
 	char		*file1;
+	char		**ft_cmds;
 	char		***cmds;
 	char		*file2;
 }				t_struct;
 
-int		ft_strlen(const char *str);
-char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_error(const char *str);
+void	free_all(t_struct *global);
 char	*ft_strjoin_new(char *s1, char *s2);
 int		ft_strcmp(const char *s1, const char *s2);
-void	free_all(t_struct *global);
-void	ft_error(const char *str);
-
+char	*ft_getpath(char *path, char **envp);
+void	pipe_first_cmd(t_struct *global, char **envp);
+void	pipe_second_cmd(t_struct *global, char **envp);
 
 #endif

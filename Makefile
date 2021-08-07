@@ -1,8 +1,14 @@
 SRC =	utils.c \
-		utils_two.c
+		utils2.c
+
+
+all: ${NAME}
 
 RUN:
-	@gcc -g ${SRC} main.c -o pipex
+	@gcc ${SRC} main.c libft/libft.a -o pipex
+	@echo "Compile Done!"
 
 BONUS:
-	@gcc -g ${SRC} bonus_pipex.c -o pipex_bonus
+	@gcc ${SRC} bonus_pipex.c libft/libft.a -o pipex_bonus
+	@echo "Compile Done!"
+
