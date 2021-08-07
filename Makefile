@@ -9,6 +9,6 @@ RUN:
 	@echo "Compile Done!"
 
 BONUS:
-	@gcc ${SRC} bonus_pipex.c libft/libft.a -o pipex_bonus
+	@gcc -g ${SRC} bonus_pipex.c libft/libft.a -o pipex_bonus
 	@echo "Compile Done!"
 

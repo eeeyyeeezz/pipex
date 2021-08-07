@@ -1,8 +1,41 @@
 #include "pipex.h"
 
-static	void	do_heredoc()
+static	char	*make_new_array(char *str)
 {
-	printf("here_doc kek\n");
+	int		i;
+	char	*new_str;
+
+	i = 0;
+	new_str = malloc(sizeof(char) * ft_strlen(str));
+	if (!new_str)
+		ft_error("Malloc Error!\n");
+	while (i < ft_strlen(str) - 1)
+	{
+		new_str[i] = str[i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
+}
+
+static	void	do_heredoc(t_struct *global, int argc, char **argv)
+{
+	char	*new_str;
+	char	str[100];
+	
+	new_str = NULL;
+	while (ft_strcmp(new_str, argv[2]))
+	{
+		write(1, "aboba> ", 7);
+		read(0, &str, 100);
+		if (new_str)
+		{
+			free(new_str);
+			new_str = NULL;
+		}
+		new_str = make_new_array(str);
+		printf("NEW STR [%s] [%s]\n", new_str, str);
+	}
 }
 
 static	void	split_to_struct(t_struct *global, char **cmds)
@@ -17,18 +50,13 @@ static	void	split_to_struct(t_struct *global, char **cmds)
 		i++;
 	}
 	global->cmds[i] = NULL;
-	// for (int i = 0; global->cmds[i]; i++)
-	// {
-	// 	for (int j = 0; global->cmds[i][j]; j++)
-	// 		printf("MEEh123 [%s]\n", global->cmds[i][j]);
-	// }
 }
 
 static	void	pars_args(t_struct *global, int argc, char **argv)
 {
-	int	count;
+	int		count;
 	char	**cmds;
-	int	i;
+	int		i;
  
 	i = 0;
 	count = 2;
@@ -96,13 +124,19 @@ int			main(int argc, char **argv, char **envp)
 {
 	t_struct	global;
 
-	if (!ft_strcmp(argv[1], "here_doc"))
-		do_heredoc();
 	if (argc < 5)
 		ft_error("Args Error!\n");
-	pars_args(&global, argc, argv);
-	open_all(&global, argc, argv);
-	ft_pipex(&global, argc, argv, envp);
+	if (!ft_strcmp(argv[1], "here_doc"))
+	{
+		pars_args(&global, argc, argv);
+		do_heredoc(&global, argc, argv);
+	}
+	else
+	{
+		pars_args(&global, argc, argv);
+		open_all(&global, argc, argv);
+		ft_pipex(&global, argc, argv, envp);
+	}
 	// free_all(&global);
 	// execve("/bin/ls", argv, envp);
 }

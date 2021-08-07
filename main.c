@@ -1,11 +1,5 @@
 #include "pipex.h"
 
-void ft_error(const char *str)
-{
-	write(1, str, ft_strlen((char *)str));
-	exit(0);
-}
-
 static	void	pars_args(t_struct *global, int argc, char **argv)
 {
 	int	count;
@@ -73,3 +67,5 @@ int			main(int argc, char **argv, char **envp)
 	ft_pipex(&global, argc, argv, envp);
 	// free_all(&global);
 }
+
+// leaks 

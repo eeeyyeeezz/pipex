@@ -1,5 +1,11 @@
 #include "pipex.h"
 
+void ft_error(const char *str)
+{
+	write(1, str, ft_strlen((char *)str));
+	exit(0);
+}
+
 static	int	ft_ft_strncmp(char *str1, char *str2, int len)
 {
 	int		i;
