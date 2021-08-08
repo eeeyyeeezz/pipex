@@ -23,8 +23,8 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	pipe_first_cmd(t_struct *global, char **envp);
 void	split_to_struct(t_struct *global, char **cmds);
 void	pipe_second_cmd(t_struct *global, char **envp);
-void	do_heredoc(t_struct *global, int argc, char **argv);
-void	pars_args_heredoc(t_struct *global, int argc, char **argv);
+void	do_heredoc(t_struct *global, char **argv);
+void	pars_args_heredoc(t_struct *global, char **argv);
 void	pars_args(t_struct *global, int argc, char **argv, int flag);
 void	open_all_bonus(t_struct *global, int argc, char **argv, int flag);
 

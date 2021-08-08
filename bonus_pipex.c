@@ -32,7 +32,7 @@ static void	ft_pipe(t_struct *global, char **envp, int pipe_fd[2], int fdd)
 	ft_execve(*global->cmds, envp);
 }
 
-static void	ft_pipex_bonus(t_struct *global, int argc, char **argv, char **envp)
+static void	ft_pipex_bonus(t_struct *global, char **envp)
 {
 	int		pipe_fd[2];
 	int		fdd;
@@ -68,15 +68,15 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("Args Error!\n");
 	if (!ft_strcmp(argv[1], "here_doc") && argc == 6)
 	{
-		pars_args_heredoc(&global, argc, argv);
+		pars_args_heredoc(&global, argv);
 		open_all_bonus(&global, argc, argv, 0);
-		do_heredoc(&global, argc, argv);
-		ft_pipex_bonus(&global, argc, argv, envp);
+		do_heredoc(&global, argv);
+		ft_pipex_bonus(&global, envp);
 	}
 	else
 	{
 		pars_args(&global, argc, argv, 1);
 		open_all_bonus(&global, argc, argv, 1);
-		ft_pipex_bonus(&global, argc, argv, envp);
+		ft_pipex_bonus(&global, envp);
 	}
 }

@@ -1,6 +1,6 @@
 #include "pipex.h"
 
-static	void	open_all(t_struct *global, int argc, char **argv)
+static	void	open_all(t_struct *global, char **argv)
 {
 	global->files_fd[0] = open(argv[1], O_RDONLY);
 	global->files_fd[1] = open(argv[4], O_TRUNC | O_WRONLY | O_CREAT, 0666);
@@ -10,11 +10,8 @@ static	void	open_all(t_struct *global, int argc, char **argv)
 		ft_error("Pipe Error!\n");
 }
 
-static void	ft_pipex(t_struct *global, int argc, char **argv, char **envp)
+static void	ft_pipex(t_struct *global, char **envp)
 {
-	char	**splitted;
-	char	*cmd_join;
-	char	**args;
 	int		pid1;
 	int		pid2;
 
@@ -43,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		ft_error("Args Error!\n");
 	pars_args(&global, argc, argv, 0);
-	open_all(&global, argc, argv);
-	ft_pipex(&global, argc, argv, envp);
+	open_all(&global, argv);
+	ft_pipex(&global, envp);
 	free(global.ft_cmds);
 }

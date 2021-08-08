@@ -22,7 +22,7 @@ static	int	get_next_line(char **line)
 		return (rb);
 }
 
-void	do_heredoc(t_struct *global, int argc, char **argv)
+void	do_heredoc(t_struct *global, char **argv)
 {
 	int		fd;
 	char	*line;

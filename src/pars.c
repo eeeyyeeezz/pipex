@@ -14,7 +14,7 @@ void	split_to_struct(t_struct *global, char **cmds)
 	global->cmds[i] = NULL;
 }
 
-void	pars_args_heredoc(t_struct *global, int argc, char **argv)
+void	pars_args_heredoc(t_struct *global, char **argv)
 {
 	char	**cmds;
 	int		i;
