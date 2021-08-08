@@ -1,0 +1,18 @@
+total 136$
+drwxr-xr-x  17 gmorra  student    578 Aug  8 16:19 .$
+drwxr-xr-x  10 gmorra  student    340 Aug  8 16:00 ..$
+-rw-r--r--@  1 gmorra  student   6148 Aug  7 12:20 .DS_Store$
+drwxr-xr-x  12 gmorra  student    408 Aug  7 15:03 .git$
+-rw-r--r--   1 gmorra  student     50 Aug  3 14:35 .gitignore$
+-rw-------   1 gmorra  student     19 Aug  8 16:04 .heredoc$
+drwxr-xr-x   3 gmorra  student    102 Aug  7 14:09 .vscode$
+-rw-r--r--   1 gmorra  student    246 Aug  8 14:54 Makefile$
+-rw-r--r--   1 gmorra  student   1541 Aug  8 16:18 bonus_pipex.c$
+-rw-r--r--   1 gmorra  student      0 Aug  8 16:19 file2$
+drwxr-xr-x@ 38 gmorra  student   1292 Aug  8 14:59 libft$
+-rw-r--r--   1 gmorra  student   1193 Aug  8 16:19 main.c$
+-rwxr-xr-x   1 gmorra  student  15252 Aug  8 16:19 pipex$
+-rw-r--r--   1 gmorra  student    948 Aug  8 16:18 pipex.h$
+-rwxr-xr-x   1 gmorra  student  17260 Aug  8 16:16 pipex_bonus$
+drwxr-xr-x   3 gmorra  student    102 Aug  8 14:54 pipex_bonus.dSYM$
+drwxr-xr-x   6 gmorra  student    204 Aug  8 14:31 src$

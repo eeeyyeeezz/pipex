@@ -12,11 +12,9 @@
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 HEADER = libft.h
-
-OPTION = -c -I $(HEADER)
 
 CC = gcc
 

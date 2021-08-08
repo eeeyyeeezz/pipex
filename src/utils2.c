@@ -1,4 +1,4 @@
-#include "pipex.h"
+#include "../pipex.h"
 
 void ft_error(const char *str)
 {

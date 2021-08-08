@@ -1,5 +1,7 @@
-SRC =	utils.c \
-		utils2.c
+SRC =	src/utils.c \
+		src/utils2.c \
+		src/pars.c \
+		src/heredoc.c
 
 
 all: ${NAME}
