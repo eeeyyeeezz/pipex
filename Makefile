@@ -10,9 +10,10 @@ GREEN = "\033[1;32m"
 
 NORMAL = "\033[0m"
 
+CC = gcc
+
 CFLAGS = -Wall -Wextra -Werror
 
-CC = gcc
 
 all: ${NAME}
 
