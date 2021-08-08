@@ -11,6 +11,9 @@ RUN:
 	@echo "Compile Done!"
 
 BONUS:
-	@gcc -g ${SRC} bonus_pipex.c libft/libft.a -o pipex_bonus
+	@gcc ${SRC} bonus_pipex.c libft/libft.a -o pipex_bonus
 	@echo "Compile Done!"
+
+
+.PHONY: all clean fclean re
 

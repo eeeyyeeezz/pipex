@@ -1,6 +1,6 @@
 #include "../pipex.h"
 
-void ft_error(const char *str)
+void	ft_error(const char *str)
 {
 	write(1, str, ft_strlen((char *)str));
 	exit(0);
@@ -15,11 +15,11 @@ static	int	ft_ft_strncmp(char *str1, char *str2, int len)
 		i++;
 	if ((!str1 && !str2) || !len)
 		return (1);
-	else 
+	else
 		return (0);
 }
 
-char		*ft_getpath(char *path, char **envp)
+char	*ft_getpath(char *path, char **envp)
 {
 	int		j;
 	int		i;

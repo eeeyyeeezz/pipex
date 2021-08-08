@@ -13,11 +13,23 @@ static void	ft_execve(char **args, char **envp)
 		cmd_join = ft_strjoin_new(splitted[i], "/");
 		cmd_join = ft_strjoin_new(cmd_join, args[0]);
 		if (!access(cmd_join, 00))
-		{ 
+		{
 			execve(cmd_join, args, envp);
 			exit(0);
 		}
 	}
+}
+
+static void	ft_pipe(t_struct *global, char **envp, int pipe_fd[2], int fdd)
+{
+	dup2(fdd, 0);
+	if (*(global->cmds + 1) != NULL)
+		dup2(pipe_fd[1], 1);
+	else
+		dup2(global->files_fd[1], 1);
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	ft_execve(*global->cmds, envp);
 }
 
 static void	ft_pipex_bonus(t_struct *global, int argc, char **argv, char **envp)
@@ -37,17 +49,8 @@ static void	ft_pipex_bonus(t_struct *global, int argc, char **argv, char **envp)
 		if (pid == -1)
 			ft_error("Fork Error mda!\n");
 		else if (pid == 0)
-		{
-			dup2(fdd, 0);
-			if (*(global->cmds + 1) != NULL) 
-				dup2(pipe_fd[1], 1);
-			else
-				dup2(global->files_fd[1], 1);
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
-			ft_execve(*global->cmds, envp);
-		}
-		else 
+			ft_pipe(global, envp, pipe_fd, fdd);
+		else
 		{
 			wait(NULL);
 			close(pipe_fd[1]);
@@ -57,7 +60,7 @@ static void	ft_pipex_bonus(t_struct *global, int argc, char **argv, char **envp)
 	}
 }
 
-int			main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_struct	global;
 

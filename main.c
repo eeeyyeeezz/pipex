@@ -15,11 +15,9 @@ static void	ft_pipex(t_struct *global, int argc, char **argv, char **envp)
 	char	**splitted;
 	char	*cmd_join;
 	char	**args;
-	int	i;
-	int	pid1;
-	int	pid2;
+	int		pid1;
+	int		pid2;
 
-	i = -1;
 	dup2(global->files_fd[0], 0);
 	dup2(global->files_fd[1], 1);
 	pid1 = fork();
@@ -34,11 +32,11 @@ static void	ft_pipex(t_struct *global, int argc, char **argv, char **envp)
 		pipe_second_cmd(global, envp);
 	close(global->pipe_fd[0]);
 	close(global->pipe_fd[1]);
-	waitpid(pid1, NULL, 0); 
-	waitpid(pid2, NULL, 0); 
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 }
 
-int			main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_struct	global;
 

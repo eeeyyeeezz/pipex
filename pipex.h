@@ -17,17 +17,15 @@ typedef struct s_struct
 }				t_struct;
 
 void	ft_error(const char *str);
-void	free_all(t_struct *global);
-char	*make_new_array(char *str);
 char	*ft_strjoin_new(char *s1, char *s2);
 char	*ft_getpath(char *path, char **envp);
 int		ft_strcmp(const char *s1, const char *s2);
 void	pipe_first_cmd(t_struct *global, char **envp);
 void	split_to_struct(t_struct *global, char **cmds);
 void	pipe_second_cmd(t_struct *global, char **envp);
-void	pars_args(t_struct *global, int argc, char **argv, int flag);
 void	do_heredoc(t_struct *global, int argc, char **argv);
 void	pars_args_heredoc(t_struct *global, int argc, char **argv);
+void	pars_args(t_struct *global, int argc, char **argv, int flag);
 void	open_all_bonus(t_struct *global, int argc, char **argv, int flag);
 
 #endif

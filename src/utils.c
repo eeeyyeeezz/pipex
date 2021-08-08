@@ -4,7 +4,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 {
 	if (!s1 || !s2)
 		return (1);
-	// printf("\nAB [%s] [%s]\n", s1, s2);
 	while (*s1++ == *s2++ && *s1 && *s2)
 		;
 	if (!*s1 && !*s2)
@@ -13,18 +12,19 @@ int	ft_strcmp(const char *s1, const char *s2)
 		return (1);
 }
 
-char		*ft_strjoin_new(char *s1, char *s2)
+char	*ft_strjoin_new(char *s1, char *s2)
 {
 	char	*ptr_free;
 
 	ptr_free = s1;
-	if (!(s1 = ft_strjoin(s1, s2)))
+	s1 = ft_strjoin(s1, s2);
+	if (!s1)
 		return (NULL);
 	free(ptr_free);
 	return (s1);
 }
 
-void		pipe_first_cmd(t_struct *global, char **envp)
+void	pipe_first_cmd(t_struct *global, char **envp)
 {
 	int		i;
 	char	*cmd_join;
@@ -42,7 +42,7 @@ void		pipe_first_cmd(t_struct *global, char **envp)
 		cmd_join = ft_strjoin_new(splitted[i], "/");
 		cmd_join = ft_strjoin_new(cmd_join, args[0]);
 		if (!access(cmd_join, 00))
-		{ 
+		{
 			execve(cmd_join, args, envp);
 			free(args);
 			exit(0);
@@ -50,7 +50,7 @@ void		pipe_first_cmd(t_struct *global, char **envp)
 	}
 }
 
-void		pipe_second_cmd(t_struct *global, char **envp)
+void	pipe_second_cmd(t_struct *global, char **envp)
 {
 	int		i;
 	char	**splitted;	
@@ -68,7 +68,7 @@ void		pipe_second_cmd(t_struct *global, char **envp)
 		cmd_join = ft_strjoin_new(splitted[i], "/");
 		cmd_join = ft_strjoin_new(cmd_join, args[0]);
 		if (!access(cmd_join, 00))
-		{ 
+		{
 			execve(cmd_join, args, envp);
 			free(args);
 			exit(0);

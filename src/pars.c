@@ -18,7 +18,7 @@ void	pars_args_heredoc(t_struct *global, int argc, char **argv)
 {
 	char	**cmds;
 	int		i;
- 
+
 	i = 0;
 	cmds = malloc(sizeof(char *) * 3);
 	if (!cmds)
@@ -36,7 +36,7 @@ void	pars_args(t_struct *global, int argc, char **argv, int flag)
 	int		count;
 	char	**cmds;
 	int		i;
- 
+
 	i = 0;
 	count = 2;
 	cmds = malloc(sizeof(char *) * (argc - 2));
@@ -51,20 +51,20 @@ void	pars_args(t_struct *global, int argc, char **argv, int flag)
 		free(cmds);
 		cmds = NULL;
 	}
-	else 
+	else
 		global->ft_cmds = cmds;
 }
 
 void	open_all_bonus(t_struct *global, int argc, char **argv, int flag)
 {
 	if (flag == 0)
-		global->files_fd[1] = open(argv[argc - 1], 
-		O_APPEND | O_WRONLY | O_CREAT, 0666);
+		global->files_fd[1] = open(argv[argc - 1],
+				O_APPEND | O_WRONLY | O_CREAT, 0666);
 	else if (flag == 1)
 	{
 		global->files_fd[0] = open(argv[1], O_RDONLY);
-		global->files_fd[1] = open(argv[argc - 1], 
-		O_TRUNC | O_WRONLY | O_CREAT, 0666);
+		global->files_fd[1] = open(argv[argc - 1],
+				O_TRUNC | O_WRONLY | O_CREAT, 0666);
 	}
 	if (global->files_fd[0] == -1 || global->files_fd[1] == -1)
 		ft_error("Fd Error!\n");
