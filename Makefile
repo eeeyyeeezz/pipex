@@ -14,23 +14,30 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
+HEADERS =	pipex.h \
+			libft/libft.h
+
+LIBFT = libft/libft.a
 
 all: ${NAME}
 
 ${NAME}:
-	@${CC} ${CFLAGS} ${SRC} main.c libft/libft.a -o ${NAME}
+	@${CC} ${CFLAGS} ${SRC} main.c -o ${NAME} ${LIBFT}
 	@echo ${GREEN}"Compile Done!"${NORMAL}
 
 BONUS:
-	@${CC} ${CFLAGS} ${SRC} bonus_pipex.c libft/libft.a -o pipex_bonus
+	@${CC} ${CFLAGS} ${SRC} bonus_pipex.c libft/*.c -o pipex_bonus
 	@echo ${GREEN}"Compile Done!"${NORMAL}
 
 clean: 
 	@rm -rf pipex
+	@rm -rf libft/*.o
 	@echo ${GREEN}"Clean Done!"${NORMAL}
 
 fclean: clean
 	@rm -rf pipex_bonus
+	@rm -rf libft/*.o
+	@rm -rf libft/libft.a
 	@echo ${GREEN}"fClean Done!"${NORMAL}
 
 re: fclean all

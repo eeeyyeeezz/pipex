@@ -6,13 +6,13 @@
 #    By: gmorra <gmorra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 16:39:14 by gmorra            #+#    #+#              #
-#    Updated: 2020/11/09 14:03:56 by gmorra           ###   ########.fr        #
+#    Updated: 2021/08/10 10:42:37 by gmorra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 HEADER = libft.h
 
@@ -31,19 +31,29 @@ SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_ba
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-all: $(NAME)
+YELLOW = "\033[1;33m"
 
-$(NAME): ${OBJ}
-	ar rc $(NAME) $(OBJ)
+RED = "\033[1;31m"
+
+NORMAL = "\033[0m"
+
+all: ${NAME}
+
+${NAME}: ${OBJ}
+	@ar rc $(NAME) $(OBJ)
+	@echo ${YELLOW}"Libft is assembled!"${NORMAL}
 
 bonus: ${OBJ} ${OBJ_BONUS}
-	ar rc $(NAME) $(OBJ) ${OBJ_BONUS}
+	@ar rc $(NAME) $(OBJ) ${OBJ_BONUS}
+	@echo ${YELLOW}"Libft bonus is assembled!"${NORMAL}
 
 clean:
-	rm -f $(OBJ) ${OBJ_BONUS}
+	@rm -f $(OBJ) ${OBJ_BONUS}
+	@echo ${RED}"Libft is cleaned!"${NORMAL}
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo ${RED}"Libft is fcleaned!"${NORMAL}
 
 re: fclean all
 

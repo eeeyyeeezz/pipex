@@ -43,4 +43,6 @@ int	main(int argc, char **argv, char **envp)
 	open_all(&global, argv);
 	ft_pipex(&global, envp);
 	free(global.ft_cmds);
+	while (1)
+	{ ; }
 }
