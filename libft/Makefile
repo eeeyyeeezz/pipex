@@ -6,7 +6,7 @@
 #    By: gmorra <gmorra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/31 16:39:14 by gmorra            #+#    #+#              #
-#    Updated: 2021/08/10 10:42:37 by gmorra           ###   ########.fr        #
+#    Updated: 2020/11/09 14:03:56 by gmorra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,16 @@ HEADER = libft.h
 
 CC = gcc
 
-SRC =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c	ft_isdigit.c\
+RED = "\033[1;31m"
+BLUE = "\033[1;34m"
+YELLOW = "\033[1;33m"
+WHITE = "\033[1;37m"
+GREEN = "\033[1;32m"
+PURPLE = "\033[1;35m"
+GRAY = "\033[1;30m"
+NORMAL = "\033[0m"
+
+SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c	ft_isdigit.c\
 	ft_isprint.c ft_itoa.c ft_memccpy.c	ft_memchr.c	ft_memcmp.c	ft_memcpy.c	ft_memmove.c\
 	ft_memset.c	ft_putchar_fd.c	ft_putendl_fd.c	ft_putnbr_fd.c ft_putstr_fd.c ft_split.c\
 	ft_strchr.c	ft_strdup.c	ft_strjoin.c ft_strlcat.c ft_strlen.c ft_strmapi.c\
@@ -31,29 +40,23 @@ SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_ba
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
-YELLOW = "\033[1;33m"
+all: $(NAME)
 
-RED = "\033[1;31m"
-
-NORMAL = "\033[0m"
-
-all: ${NAME}
-
-${NAME}: ${OBJ}
+$(NAME): ${OBJ}
 	@ar rc $(NAME) $(OBJ)
-	@echo ${YELLOW}"Libft is assembled!"${NORMAL}
+	@echo ${RED}"Compile libft done! ✅"${NORMAL}
 
 bonus: ${OBJ} ${OBJ_BONUS}
 	@ar rc $(NAME) $(OBJ) ${OBJ_BONUS}
-	@echo ${YELLOW}"Libft bonus is assembled!"${NORMAL}
+	@echo ${RED}"Compile libft_bonus done! ✅"${NORMAL}
 
 clean:
 	@rm -f $(OBJ) ${OBJ_BONUS}
-	@echo ${RED}"Libft is cleaned!"${NORMAL}
+	@echo ${BLUE}"Clean libft Done!"${NORMAL}
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo ${RED}"Libft is fcleaned!"${NORMAL}
+	@echo ${BLUE}"fClean libft Done!"${NORMAL}
 
 re: fclean all
 

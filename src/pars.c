@@ -17,7 +17,9 @@ void	split_to_struct(t_struct *global, char **cmds)
 void	pars_args_heredoc(t_struct *global, char **argv)
 {
 	char	**cmds;
+	int		i;
 
+	i = 0;
 	cmds = malloc(sizeof(char *) * 3);
 	if (!cmds)
 		ft_error("Malloc Error!\n");
