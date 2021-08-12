@@ -21,9 +21,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBFT = libft/libft.a
 
+OBJ = $(SRC:.c=.o)
+
 all: ${NAME}
 
-${NAME}: ${LIBFT}
+${NAME}: ${LIBFT} ${OBJ}
 	@${CC} ${CFLAGS} ${SRC} main.c -o ${NAME} -Llibft -lft -Ilibft
 	@echo ${GREEN}"Compile pipex done! ✅"${NORMAL}
 
@@ -35,11 +37,12 @@ BONUS:
 	@echo ${GREEN}"Compile pipex_bonus done! ✅"${NORMAL}
 
 clean: 
-	@rm -rf pipex
+	@rm -rf src/*.o
 	@make clean -C libft
 	@echo ${YELLOW}"Clean pipex Done!"${NORMAL}
 
 fclean: clean
+	@rm -rf pipex
 	@rm -rf pipex_bonus
 	@make fclean -C libft
 	@echo ${YELLOW}"fClean pipex Done!"${NORMAL}
